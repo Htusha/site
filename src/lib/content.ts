@@ -7,7 +7,7 @@ export const site = {
 /** Фото: положите файлы в public/photos/ и укажите имена здесь */
 export const photos = {
   /** Главный портрет — секция Hero */
-  portrait: "/photos/portrait.jpg",
+  portrait: "/photos/portrait.JPG",
   /** Дополнительные — секция «Обо мне» */
   gallery: [
     { src: "/photos/photo-2.jpg", alt: "Антон Морозов" },
