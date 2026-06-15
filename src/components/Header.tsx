@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { navLinks, site } from "@/lib/content";
 
 export default function Header() {
@@ -31,26 +32,26 @@ export default function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-4xl items-center justify-between px-5 py-3.5 sm:px-8 lg:px-12">
-        <a
-          href="#"
+        <Link
+          href="/"
           className="text-sm font-semibold tracking-tight text-ink transition-colors hover:text-ink-secondary"
         >
           {site.name}
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
           {navLinks.slice(0, -1).map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="text-sm text-ink-secondary transition-colors hover:text-ink"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
-          <a href="#booking" className="btn-primary">
+          <Link href="/#booking" className="btn-primary">
             Запись
-          </a>
+          </Link>
         </nav>
 
         <button
@@ -84,16 +85,23 @@ export default function Header() {
       {isOpen && (
         <div className="fixed inset-0 top-[53px] z-40 bg-surface md:hidden">
           <nav className="flex flex-col border-t border-line px-5 py-4">
-            {navLinks.map((link) => (
-              <a
+            {navLinks.slice(0, -1).map((link) => (
+              <Link
                 key={link.href}
                 href={link.href}
                 onClick={closeMenu}
                 className="border-b border-line py-3.5 text-sm text-ink"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
+            <Link
+              href="/#booking"
+              onClick={closeMenu}
+              className="btn-primary mt-4 block text-center"
+            >
+              Запись
+            </Link>
           </nav>
         </div>
       )}

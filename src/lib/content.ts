@@ -16,12 +16,46 @@ export const photos = {
 } as const;
 
 export const navLinks = [
-  { href: "#about", label: "Обо мне" },
-  { href: "#approach", label: "Подход" },
-  { href: "#services", label: "Запросы" },
-  { href: "#process", label: "Как работаем" },
-  { href: "#booking", label: "Запись" },
-  { href: "#contact", label: "Контакты" },
+  { href: "/#about", label: "Обо мне" },
+  { href: "/#approach", label: "Подход" },
+  { href: "/#services", label: "Запросы" },
+  { href: "/#process", label: "Как работаем" },
+  { href: "/#tests", label: "Тесты" },
+  { href: "/#booking", label: "Запись" },
+  { href: "/#contact", label: "Контакты" },
+] as const;
+
+export const testsIntro =
+  "Иногда бывает сложно понять, насколько выражена проблема. Эти опросники не заменяют диагностику, но могут помочь лучше понять своё состояние.";
+
+export const testsDisclaimer =
+  "Результаты тестов носят информационный характер и не являются медицинским заключением.";
+
+export const tests = [
+  {
+    id: "bdi",
+    slug: "bdi",
+    abbr: "BDI",
+    title: "Шкала депрессии Бека",
+    description:
+      "Опросник для оценки выраженности депрессивных симптомов.",
+  },
+  {
+    id: "ysq-s3r",
+    slug: "ysq-s3r",
+    abbr: "YSQ S3R",
+    title: "Схемный опросник Янга",
+    description:
+      "Опросник предназначен для выявления ранних дезадаптивных схем (РДС) — устойчивых психологических структур, сформированных в детстве из‑за неудовлетворения базовых эмоциональных потребностей.",
+  },
+  {
+    id: "ypi",
+    slug: "ypi",
+    abbr: "YPI",
+    title: "Опросник родительского стиля Янга",
+    description:
+      "Используется в схема-терапии для оценки влияния стилей воспитания на формирование личности и выявления источников ранних дезадаптивных схем.",
+  },
 ] as const;
 
 export const heroPainPoints = [
