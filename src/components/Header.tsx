@@ -25,10 +25,14 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-200 ${
-        isScrolled || isOpen
-          ? "border-b border-line bg-surface/95 backdrop-blur-sm"
-          : "bg-surface"
+      className={`fixed inset-x-0 top-0 transition-colors duration-200 ${
+        isOpen ? "z-[100]" : "z-50"
+      } ${
+        isOpen
+          ? "border-b border-line bg-surface-raised"
+          : isScrolled
+            ? "border-b border-line bg-surface/95 backdrop-blur-sm"
+            : "bg-surface"
       }`}
     >
       <div className="mx-auto flex max-w-4xl items-center justify-between px-5 py-3.5 sm:px-8 lg:px-12">
@@ -83,7 +87,12 @@ export default function Header() {
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 top-[53px] z-40 bg-surface md:hidden">
+        <div
+          className="fixed inset-x-0 bottom-0 top-[53px] z-[60] overflow-y-auto bg-surface-raised md:hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Меню"
+        >
           <nav className="flex flex-col border-t border-line px-5 py-4">
             {navLinks.slice(0, -1).map((link) => (
               <Link

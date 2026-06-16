@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import { site } from "@/lib/content";
+import {
+  defaultDescription,
+  defaultTitle,
+  keywords,
+  siteName,
+  siteUrl,
+} from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -16,9 +22,41 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${site.name} — КПТ и схемотерапия`,
-  description:
-    "Консультирующий психолог в Буэнос-Айресе. КПТ, схемотерапия, ОРКТ. Работа с тревогой, самокритикой, прокрастинацией. Онлайн и очно.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: defaultTitle,
+    template: `%s — ${siteName}`,
+  },
+  description: defaultDescription,
+  keywords,
+  authors: [{ name: siteName, url: siteUrl }],
+  creator: siteName,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "ru_RU",
+    url: siteUrl,
+    siteName,
+    title: defaultTitle,
+    description: defaultDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: defaultDescription,
+  },
 };
 
 export default function RootLayout({
@@ -26,9 +64,35 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: siteName,
+    jobTitle: "Психолог",
+    url: siteUrl,
+    description: defaultDescription,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Buenos Aires",
+      addressCountry: "AR",
+    },
+    knowsAbout: [
+      "Когнитивно-поведенческая терапия",
+      "Схемотерапия",
+      "Тревога",
+      "Самокритика",
+    ],
+  };
+
   return (
     <html lang="ru" className={`${inter.variable} ${jetbrains.variable}`}>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

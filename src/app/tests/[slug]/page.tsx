@@ -1,4 +1,5 @@
 import BackLink from "@/components/BackLink";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import TestResultShare from "@/components/TestResultShare";
 import { tests, testsDisclaimer } from "@/lib/content";
@@ -10,6 +11,21 @@ type Props = {
 
 export function generateStaticParams() {
   return tests.map((test) => ({ slug: test.slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const test = tests.find((item) => item.slug === slug);
+
+  if (!test) return {};
+
+  return {
+    title: test.title,
+    description: test.description,
+    alternates: {
+      canonical: `/tests/${test.slug}`,
+    },
+  };
 }
 
 export default async function TestPage({ params }: Props) {

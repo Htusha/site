@@ -5,10 +5,43 @@ import { pricing } from "@/lib/content";
 
 export default function Booking() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      const response = await fetch("/api/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          contact: formData.get("contact"),
+          format: formData.get("format"),
+          message: formData.get("message"),
+        }),
+      });
+
+      if (!response.ok) {
+        const data = (await response.json().catch(() => null)) as {
+          error?: string;
+        } | null;
+        throw new Error(data?.error ?? "Не удалось отправить заявку");
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Не удалось отправить заявку",
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -65,7 +98,7 @@ export default function Booking() {
                   Отправлено
                 </p>
                 <p className="mt-3 text-sm text-ink-secondary">
-                  Спасибо. Отвечу в ближайшее время.
+                  Спасибо. Заявка отправлена — отвечу в ближайшее время.
                 </p>
               </div>
             ) : (
@@ -82,8 +115,9 @@ export default function Booking() {
                     name="name"
                     type="text"
                     required
+                    disabled={loading}
                     placeholder="Как к вам обращаться"
-                    className="w-full border border-line bg-surface px-3 py-2.5 text-sm text-ink placeholder:text-ink-muted outline-none transition-colors focus:border-ink"
+                    className="w-full border border-line bg-surface px-3 py-2.5 text-sm text-ink placeholder:text-ink-muted outline-none transition-colors focus:border-ink disabled:opacity-60"
                   />
                 </div>
 
@@ -99,8 +133,9 @@ export default function Booking() {
                     name="contact"
                     type="text"
                     required
+                    disabled={loading}
                     placeholder="@username или +7..."
-                    className="w-full border border-line bg-surface px-3 py-2.5 text-sm text-ink placeholder:text-ink-muted outline-none transition-colors focus:border-ink"
+                    className="w-full border border-line bg-surface px-3 py-2.5 text-sm text-ink placeholder:text-ink-muted outline-none transition-colors focus:border-ink disabled:opacity-60"
                   />
                 </div>
 
@@ -114,7 +149,8 @@ export default function Booking() {
                   <select
                     id="format"
                     name="format"
-                    className="w-full border border-line bg-surface px-3 py-2.5 text-sm text-ink outline-none transition-colors focus:border-ink"
+                    disabled={loading}
+                    className="w-full border border-line bg-surface px-3 py-2.5 text-sm text-ink outline-none transition-colors focus:border-ink disabled:opacity-60"
                   >
                     <option value="online">Онлайн (Zoom)</option>
                     <option value="offline">Очно (Olivos, Буэнос-Айрес)</option>
@@ -133,13 +169,24 @@ export default function Booking() {
                     id="message"
                     name="message"
                     rows={3}
+                    disabled={loading}
                     placeholder="Кратко: что беспокоит (необязательно)"
-                    className="w-full resize-none border border-line bg-surface px-3 py-2.5 text-sm text-ink placeholder:text-ink-muted outline-none transition-colors focus:border-ink"
+                    className="w-full resize-none border border-line bg-surface px-3 py-2.5 text-sm text-ink placeholder:text-ink-muted outline-none transition-colors focus:border-ink disabled:opacity-60"
                   />
                 </div>
 
-                <button type="submit" className="btn-primary w-full">
-                  Отправить
+                {error && (
+                  <p className="text-sm text-red-600" role="alert">
+                    {error}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="btn-primary w-full disabled:opacity-60"
+                >
+                  {loading ? "Отправка…" : "Отправить"}
                 </button>
 
                 <p className="text-center text-xs text-ink-muted">
