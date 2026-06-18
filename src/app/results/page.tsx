@@ -1,6 +1,7 @@
 "use client";
 
 import BackLink from "@/components/BackLink";
+import ResultAnswersBreakdown from "@/components/ResultAnswersBreakdown";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { testsDisclaimer } from "@/lib/content";
@@ -46,9 +47,16 @@ function ResultsContent() {
           Результат теста
         </p>
         <h1 className="mt-2 text-xl font-semibold text-ink">{result.testTitle}</h1>
-        <p className="mt-1 text-xs text-ink-muted">
-          {new Date(result.completedAt).toLocaleString("ru-RU")}
-        </p>
+        {result.completedAt && (
+          <p className="mt-1 text-xs text-ink-muted">
+            {new Date(result.completedAt).toLocaleString("ru-RU")}
+          </p>
+        )}
+        {!result.completedAt && result.answers && (
+          <p className="mt-1 text-xs text-ink-muted">
+            Анонимный результат — без привязки к личности
+          </p>
+        )}
       </div>
 
       <div className="space-y-4 px-6 py-5">
@@ -72,6 +80,8 @@ function ResultsContent() {
             ))}
           </dl>
         )}
+
+        <ResultAnswersBreakdown result={result} />
       </div>
 
       <div className="border-t border-line px-6 py-4">

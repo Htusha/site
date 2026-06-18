@@ -40,8 +40,8 @@ export default function TestResultShare({ result }: TestResultShareProps) {
         Сохранить и отправить
       </p>
       <p className="mt-2 text-sm leading-relaxed text-ink-secondary">
-        После прохождения теста вы сможете сохранить результат у себя и
-        получить ссылку, которой можно поделиться — например, с психологом.
+        Ссылка содержит только комбинацию ответов — без имени и контактов. Ею
+        можно поделиться с психологом.
       </p>
 
       {!saved ? (

@@ -14,11 +14,7 @@ export default function BackLink({
   className,
 }: BackLinkProps) {
   return (
-    <Link
-      href={`/?section=${sectionId}`}
-      className={className}
-      prefetch
-    >
+    <Link href={`/?section=${sectionId}`} className={className} prefetch>
       {children}
     </Link>
   );
