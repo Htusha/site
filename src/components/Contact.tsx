@@ -67,6 +67,16 @@ export default function Contact() {
             <span className="font-mono text-xs text-ink-muted">Очно · </span>
             {contacts.office}
           </p>
+          <p className="pt-2 text-xs text-ink-muted">
+            <a
+              href={contacts.b17.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-line underline-offset-2 transition-colors hover:text-ink-secondary"
+            >
+              Анкета на b17.ru
+            </a>
+          </p>
         </div>
       </div>
     </section>

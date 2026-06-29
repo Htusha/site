@@ -183,6 +183,9 @@ export const contacts = {
     name: "Психолог из Аргентины",
     href: "",
   },
+  b17: {
+    href: "https://www.b17.ru/anton_morozov/?prt=882275",
+  },
   office: "Olivos, Zona Norte, Буэнос-Айрес",
   online: "Zoom — нужны камера, микрофон и спокойное место",
 } as const;
