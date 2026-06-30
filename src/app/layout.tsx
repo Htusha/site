@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     description: defaultDescription,
   },
   verification: {
-    yandex: "94f0014ace3e8ebd",
+    yandex: "99189ba29b0a3169",
   },
 };
 
