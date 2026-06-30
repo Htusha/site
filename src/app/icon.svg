@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="=B>= >@>7>2">
+  <rect width="32" height="32" fill="#FAFAFA" />
+  <rect
+    x="0.5"
+    y="0.5"
+    width="31"
+    height="31"
+    fill="none"
+    stroke="#E4E4E7"
+    stroke-width="1"
+  />
+  <text
+    x="16"
+    y="20.5"
+    text-anchor="middle"
+    font-family="ui-monospace, 'Cascadia Code', 'SF Mono', Consolas, monospace"
+    font-size="9.5"
+    font-weight="500"
+    letter-spacing="0.75"
+    fill="#18181B"
+  >
+    AM
+  </text>
+</svg>
