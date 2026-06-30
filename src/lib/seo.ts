@@ -1,7 +1,8 @@
 import { site } from "@/lib/content";
 
 export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://amorozov.ar";
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
+  "https://www.amorozov.ar";
 
 export const siteName = site.name;
 

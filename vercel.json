@@ -1,0 +1,25 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "amorozov.ar" }],
+      "destination": "https://www.amorozov.ar/:path*",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/yandex_99189ba29b0a3169.html",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/html; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
+}
