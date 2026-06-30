@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/favicon.ico",
+      "destination": "/icon",
+      "permanent": false
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "amorozov.ar" }],
       "destination": "https://www.amorozov.ar/:path*",
