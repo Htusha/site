@@ -57,9 +57,6 @@ export const metadata: Metadata = {
     title: defaultTitle,
     description: defaultDescription,
   },
-  verification: {
-    yandex: "99189ba29b0a3169",
-  },
 };
 
 export default function RootLayout({
